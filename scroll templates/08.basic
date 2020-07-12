@@ -1,0 +1,5 @@
+BEGIN
+10 IF ${var} IS ${value} THEN ${action} ELSE ${action}
+20 ${action}
+30 IF ${var} IS NOT ${value} THEN GOTO ${10}
+END

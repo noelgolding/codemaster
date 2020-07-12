@@ -1,0 +1,10 @@
+BEGIN
+10 ${action}
+20 IF ${var} IS ${value} THEN LOOP
+30 >>> ${action}
+40 >>> ${action}
+50 >>> ${action}
+60 ${action}
+70 ${action}
+80 ${action}
+END

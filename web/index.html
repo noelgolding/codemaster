@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Code Master</title>
+    <link rel="stylesheet" href="css/codemaster.css" type="text/css">
+  </head>
+
+  <body>
+
+    <div class="app-container">
+      <div class="top-container">
+        <div id="cm_titlebar" class="hidden">
+          <div class="title-container">
+            Code Master
+          </div>
+          <div class="ui-buttons-container">
+            <button class="restore-button" onclick="toggleFullScreen()"></button>
+          </div>
+        </div>
+        <div class="menubar-container">menubar</div>
+        <div class="toolbar-container">
+          <div class="game-buttons-container">
+            <button class="open"></button>
+            <button class="save"></button>
+          </div>
+          <div class="ui-buttons-container">
+            <button class="dock-sidebar-button" onclick="dockSideBar(this, '.app-container')"></button>
+            <button class="fullscreen-button" onclick="toggleFullScreen()"></button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="ui-container">
+        <div class="hud-container">HUD</div>
+        <div class="gamescreen-container">gamescreen</div>
+      </div>
+
+      <div class="console-container">
+        <div class="debugbar-container">
+          <div class="code-buttons-container">
+            <button class="add-line"></button>
+            <button class="delete-line"></button>
+            <button class="tab-line"></button>
+          </div>
+          <div class="debug-buttons-container">
+            <button class="step-back"></button>
+            <button class="exec"></button>
+            <button class="step-forward"></button>
+          </div>
+          <div class="ui-buttons-container">
+            <button class="minimize"></button>
+            <button class="dock-sidebar-button" onclick="dockSideBar(this, '.console-container')"></button>
+          </div>
+        </div>
+        <div class="codeeditor-container">
+          <div class="code-container">
+            <div>Begin</div>
+            <div class="code-lines">
+              <div class="code lineno" contenteditable="true">run</div>
+              <div class="code lineno" contenteditable="true">jump</div>
+              <div class="code lineno" contenteditable="true">while gems is not 2 then loop</div>
+              <div class="code tabbed" contenteditable="true">run</div>
+              <div class="code tabbed" contenteditable="true">jump</div>
+              <div class="code lineno" contenteditable="true">slide</div>
+              <div class="code lineno" contenteditable="true">if troll is orange then jump else slide</div>
+            </div>
+            <div>End</div>
+          </div>
+        </div>
+        <div class="variables-container">
+          <div class="variables-header">
+            variables
+          </div>
+          <div class="gem">
+            gems
+          </div>
+          <div class="troll">
+            troll
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-container">
+        <div class="assets-container">
+          <div>Level: ###</div>
+          <div>Difficulty: ###</div>
+          <div>Start: AAA</div>
+          <div>Goal: BBB</div>
+          <div>Gems: ###</div>
+          <div>Actions:</div>
+          <div class="actions-container">
+            <div class="action run disabled"></div>
+            <div class="action jump"></div>
+            <div class="action slide"></div>
+          </div>
+          <div>Conditionals:</div>
+          <div class="cond-container">
+            <div class="conditional gem" data-value="2"></div>
+            <div class="conditional gem disabled" data-value="3"></div>
+            <div class="conditional troll" data-value="--orange"></div>
+          </div>
+        </div>
+        <div class="flowchart-container">flowchart</div>
+      </div>
+
+      <div class="statusbar-container">statusbar</div>
+    </div>
+
+    <script src="scripts/browser.js" charset="utf-8"></script>
+    <script src="scripts/cm_core.js" charset="utf-8"></script>
+    <script src="scripts/cm_ui.js" charset="utf-8"></script>
+
+  </body>
+
+</html>

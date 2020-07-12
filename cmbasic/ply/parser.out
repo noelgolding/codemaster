@@ -1,0 +1,327 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> prog
+Rule 1     prog -> BEGIN instructions END
+Rule 2     prog -> BEGIN END
+Rule 3     instructions -> instructions instruction
+Rule 4     instructions -> instruction
+Rule 5     instruction -> WHOLENUMBER statement
+Rule 6     statement -> ACTION
+Rule 7     statement -> IF cond THEN ACTION
+Rule 8     statement -> IF cond THEN ACTION ELSE ACTION
+Rule 9     statement -> IF cond THEN GOTO WHOLENUMBER
+Rule 10    statement -> IF cond THEN LOOP actionlist
+Rule 11    actionlist -> actionlist indentedaction
+Rule 12    actionlist -> indentedaction
+Rule 13    indentedaction -> INDENT ACTION
+Rule 14    cond -> GEMS BOOLOP WHOLENUMBER
+Rule 15    cond -> TROLL BOOLOP COLOR
+
+Terminals, with rules where they appear
+
+ACTION               : 6 7 8 8 13
+BEGIN                : 1 2
+BOOLOP               : 14 15
+COLOR                : 15
+ELSE                 : 8
+END                  : 1 2
+GEMS                 : 14
+GOTO                 : 9
+IF                   : 7 8 9 10
+INDENT               : 13
+LOOP                 : 10
+THEN                 : 7 8 9 10
+TROLL                : 15
+WHOLENUMBER          : 5 9 14
+error                : 
+
+Nonterminals, with rules where they appear
+
+actionlist           : 10 11
+cond                 : 7 8 9 10
+indentedaction       : 11 12
+instruction          : 3 4
+instructions         : 1 3
+prog                 : 0
+statement            : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . prog
+    (1) prog -> . BEGIN instructions END
+    (2) prog -> . BEGIN END
+
+    BEGIN           shift and go to state 2
+
+    prog                           shift and go to state 1
+
+state 1
+
+    (0) S' -> prog .
+
+
+
+state 2
+
+    (1) prog -> BEGIN . instructions END
+    (2) prog -> BEGIN . END
+    (3) instructions -> . instructions instruction
+    (4) instructions -> . instruction
+    (5) instruction -> . WHOLENUMBER statement
+
+    END             shift and go to state 4
+    WHOLENUMBER     shift and go to state 6
+
+    instructions                   shift and go to state 3
+    instruction                    shift and go to state 5
+
+state 3
+
+    (1) prog -> BEGIN instructions . END
+    (3) instructions -> instructions . instruction
+    (5) instruction -> . WHOLENUMBER statement
+
+    END             shift and go to state 7
+    WHOLENUMBER     shift and go to state 6
+
+    instruction                    shift and go to state 8
+
+state 4
+
+    (2) prog -> BEGIN END .
+
+    $end            reduce using rule 2 (prog -> BEGIN END .)
+
+
+state 5
+
+    (4) instructions -> instruction .
+
+    END             reduce using rule 4 (instructions -> instruction .)
+    WHOLENUMBER     reduce using rule 4 (instructions -> instruction .)
+
+
+state 6
+
+    (5) instruction -> WHOLENUMBER . statement
+    (6) statement -> . ACTION
+    (7) statement -> . IF cond THEN ACTION
+    (8) statement -> . IF cond THEN ACTION ELSE ACTION
+    (9) statement -> . IF cond THEN GOTO WHOLENUMBER
+    (10) statement -> . IF cond THEN LOOP actionlist
+
+    ACTION          shift and go to state 10
+    IF              shift and go to state 11
+
+    statement                      shift and go to state 9
+
+state 7
+
+    (1) prog -> BEGIN instructions END .
+
+    $end            reduce using rule 1 (prog -> BEGIN instructions END .)
+
+
+state 8
+
+    (3) instructions -> instructions instruction .
+
+    END             reduce using rule 3 (instructions -> instructions instruction .)
+    WHOLENUMBER     reduce using rule 3 (instructions -> instructions instruction .)
+
+
+state 9
+
+    (5) instruction -> WHOLENUMBER statement .
+
+    END             reduce using rule 5 (instruction -> WHOLENUMBER statement .)
+    WHOLENUMBER     reduce using rule 5 (instruction -> WHOLENUMBER statement .)
+
+
+state 10
+
+    (6) statement -> ACTION .
+
+    END             reduce using rule 6 (statement -> ACTION .)
+    WHOLENUMBER     reduce using rule 6 (statement -> ACTION .)
+
+
+state 11
+
+    (7) statement -> IF . cond THEN ACTION
+    (8) statement -> IF . cond THEN ACTION ELSE ACTION
+    (9) statement -> IF . cond THEN GOTO WHOLENUMBER
+    (10) statement -> IF . cond THEN LOOP actionlist
+    (14) cond -> . GEMS BOOLOP WHOLENUMBER
+    (15) cond -> . TROLL BOOLOP COLOR
+
+    GEMS            shift and go to state 13
+    TROLL           shift and go to state 14
+
+    cond                           shift and go to state 12
+
+state 12
+
+    (7) statement -> IF cond . THEN ACTION
+    (8) statement -> IF cond . THEN ACTION ELSE ACTION
+    (9) statement -> IF cond . THEN GOTO WHOLENUMBER
+    (10) statement -> IF cond . THEN LOOP actionlist
+
+    THEN            shift and go to state 15
+
+
+state 13
+
+    (14) cond -> GEMS . BOOLOP WHOLENUMBER
+
+    BOOLOP          shift and go to state 16
+
+
+state 14
+
+    (15) cond -> TROLL . BOOLOP COLOR
+
+    BOOLOP          shift and go to state 17
+
+
+state 15
+
+    (7) statement -> IF cond THEN . ACTION
+    (8) statement -> IF cond THEN . ACTION ELSE ACTION
+    (9) statement -> IF cond THEN . GOTO WHOLENUMBER
+    (10) statement -> IF cond THEN . LOOP actionlist
+
+    ACTION          shift and go to state 18
+    GOTO            shift and go to state 19
+    LOOP            shift and go to state 20
+
+
+state 16
+
+    (14) cond -> GEMS BOOLOP . WHOLENUMBER
+
+    WHOLENUMBER     shift and go to state 21
+
+
+state 17
+
+    (15) cond -> TROLL BOOLOP . COLOR
+
+    COLOR           shift and go to state 22
+
+
+state 18
+
+    (7) statement -> IF cond THEN ACTION .
+    (8) statement -> IF cond THEN ACTION . ELSE ACTION
+
+    END             reduce using rule 7 (statement -> IF cond THEN ACTION .)
+    WHOLENUMBER     reduce using rule 7 (statement -> IF cond THEN ACTION .)
+    ELSE            shift and go to state 23
+
+
+state 19
+
+    (9) statement -> IF cond THEN GOTO . WHOLENUMBER
+
+    WHOLENUMBER     shift and go to state 24
+
+
+state 20
+
+    (10) statement -> IF cond THEN LOOP . actionlist
+    (11) actionlist -> . actionlist indentedaction
+    (12) actionlist -> . indentedaction
+    (13) indentedaction -> . INDENT ACTION
+
+    INDENT          shift and go to state 27
+
+    actionlist                     shift and go to state 25
+    indentedaction                 shift and go to state 26
+
+state 21
+
+    (14) cond -> GEMS BOOLOP WHOLENUMBER .
+
+    THEN            reduce using rule 14 (cond -> GEMS BOOLOP WHOLENUMBER .)
+
+
+state 22
+
+    (15) cond -> TROLL BOOLOP COLOR .
+
+    THEN            reduce using rule 15 (cond -> TROLL BOOLOP COLOR .)
+
+
+state 23
+
+    (8) statement -> IF cond THEN ACTION ELSE . ACTION
+
+    ACTION          shift and go to state 28
+
+
+state 24
+
+    (9) statement -> IF cond THEN GOTO WHOLENUMBER .
+
+    END             reduce using rule 9 (statement -> IF cond THEN GOTO WHOLENUMBER .)
+    WHOLENUMBER     reduce using rule 9 (statement -> IF cond THEN GOTO WHOLENUMBER .)
+
+
+state 25
+
+    (10) statement -> IF cond THEN LOOP actionlist .
+    (11) actionlist -> actionlist . indentedaction
+    (13) indentedaction -> . INDENT ACTION
+
+    END             reduce using rule 10 (statement -> IF cond THEN LOOP actionlist .)
+    WHOLENUMBER     reduce using rule 10 (statement -> IF cond THEN LOOP actionlist .)
+    INDENT          shift and go to state 27
+
+    indentedaction                 shift and go to state 29
+
+state 26
+
+    (12) actionlist -> indentedaction .
+
+    INDENT          reduce using rule 12 (actionlist -> indentedaction .)
+    END             reduce using rule 12 (actionlist -> indentedaction .)
+    WHOLENUMBER     reduce using rule 12 (actionlist -> indentedaction .)
+
+
+state 27
+
+    (13) indentedaction -> INDENT . ACTION
+
+    ACTION          shift and go to state 30
+
+
+state 28
+
+    (8) statement -> IF cond THEN ACTION ELSE ACTION .
+
+    END             reduce using rule 8 (statement -> IF cond THEN ACTION ELSE ACTION .)
+    WHOLENUMBER     reduce using rule 8 (statement -> IF cond THEN ACTION ELSE ACTION .)
+
+
+state 29
+
+    (11) actionlist -> actionlist indentedaction .
+
+    INDENT          reduce using rule 11 (actionlist -> actionlist indentedaction .)
+    END             reduce using rule 11 (actionlist -> actionlist indentedaction .)
+    WHOLENUMBER     reduce using rule 11 (actionlist -> actionlist indentedaction .)
+
+
+state 30
+
+    (13) indentedaction -> INDENT ACTION .
+
+    INDENT          reduce using rule 13 (indentedaction -> INDENT ACTION .)
+    END             reduce using rule 13 (indentedaction -> INDENT ACTION .)
+    WHOLENUMBER     reduce using rule 13 (indentedaction -> INDENT ACTION .)
+

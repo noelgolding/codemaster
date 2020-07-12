@@ -1,0 +1,322 @@
+:root {
+  --terminal-black: #282828;
+  --terminal-code-color: #00ff66;
+  --terminal-status-color: #ffb000;
+  --terminal-font-size: 2rem;
+  --token-size: 3rem;
+  --ui-frame-gap: .05125rem;
+  --graph-bg-color: var(--terminal-black); /*#00004f; /* some kind of blue */
+  --graph-minor-line-color: rgba(25, 70, 91, 0.5);
+  --graph-bg-size-1: 15px 15px;
+  --graph-bg-size-2: 60px 60px;
+}
+
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ========================================
+  Containers
+======================================== */
+
+.app-container{
+  margin: auto;
+  border: var(--ui-frame-gap) solid silver;
+  background-color: #efefef;
+  height: 100%;
+  width: 100%;
+  max-width: 1024px;
+  display: grid;
+  grid-column-gap: var(--ui-frame-gap); 
+  grid-template-columns: auto min-content;
+  grid-template-rows: min-content auto min-content min-content;
+  grid-template-areas: 
+  "top       top"
+  "ui        sidebar"
+  "console   sidebar"
+  "statusbar statusbar"
+  ;
+}
+
+.app-container.flipped{
+  grid-template-columns: min-content auto;
+  grid-template-areas: 
+  "top       top"
+  "sidebar   ui"
+  "sidebar   console"
+  "statusbar statusbar"
+  ;
+}
+
+.top-container{
+  grid-area: top;
+}
+
+.menubar-container {
+  background-color: silver;
+}
+
+.toolbar-container {
+  background-color: lightgray;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.game-buttons-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ui-container {
+  grid-area: ui;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: min-content auto;
+}
+
+.hud-container {
+  background-color: #282828;
+  color: white;
+}
+
+.gamescreen-container {
+  background-color: lightyellow;
+}
+
+.console-container {
+  grid-area: console;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 10rem;
+  grid-template-rows: min-content auto;
+  grid-template-areas: 
+  "debugbar debugbar"
+  "code     vars"
+  ;
+}
+
+.console-container.flipped {
+  grid-template-columns: 10rem auto;
+  grid-template-areas: 
+  "debugbar debugbar"
+  "vars     code"
+  ;
+}
+
+.debugbar-container {
+  grid-area: debugbar;
+  background-color: lightgray;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.code-buttons-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.debug-buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+.ui-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.codeeditor-container {
+  grid-area: code;
+  max-width: 30rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  background-color: var(--terminal-black);
+  color: var(--terminal-code-color);
+  text-shadow: 0 0 1px #80ffc0, 0 0 2px #00ff66;
+}
+
+.variables-container {
+  grid-area: vars;
+  padding: .5rem 2rem 0 .25rem;
+}
+
+
+.sidebar-container {
+  grid-area: sidebar;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-row-gap: .5rem;
+  grid-template-rows: min-content auto;
+}
+
+.assets-container {
+  background-color: var(--graph-bg-color);
+  color: white;
+  padding: .5rem;
+}
+
+.flowchart-container {
+  /* TODO : wrangle the graph, or better yet, get a tileable graph paper background image */
+  background-color: var(--graph-bg-color);
+  background-image: 
+    linear-gradient(rgba(25, 70, 91, 0.5) 1px, transparent 1px),  /* minor horizontal */
+    linear-gradient(#19465b 1px, transparent 1px), /* major horizontal */
+    linear-gradient(90deg, rgba(25, 70, 91, 0.5) 1px, transparent 1px), /* minor vertical */
+    linear-gradient(90deg, rgba(25, 70, 91, 0.7) 1px, transparent 1px), /* major vertical */
+    linear-gradient(transparent 3px, #0f004f 3px, #00004f 58px, transparent 58px), /* gradient background overlay */
+    linear-gradient(90deg, rgba(25, 70, 91, 0.7) 3px, transparent 3px, transparent 58px, rgba(25, 70, 91, 0.7) 58px); /* dot */
+  background-size: 
+    var(--graph-bg-size-1), /* minor horizontal */
+    var(--graph-bg-size-2), /* major horizontal */
+    var(--graph-bg-size-1), /* minor vertical */
+    var(--graph-bg-size-2), /* major vertical */
+    var(--graph-bg-size-2), /* gradient background overlay */
+    var(--graph-bg-size-2); /* dot */
+}
+
+.statusbar-container {
+  grid-area: statusbar;
+  margin-top: var(--ui-frame-gap);
+  padding: 0 .125rem .125rem .5rem;
+  font-family: monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-style: italic;
+  background-color: var(--terminal-black);
+  color: var(--terminal-status-color);
+}
+
+.assets-container .actions-container {
+  display: grid;
+  grid-gap: .5rem;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.assets-container .cond-container {
+  display: grid;
+  grid-gap: .5rem;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.code-container {
+  counter-reset: lineno;
+  overflow:auto;
+  white-space: nowrap;
+}
+
+#cm_titlebar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ========================================
+  Widgets
+======================================== */
+.fullscreen-button::before {
+  content: "<>"
+}
+
+.restore-button::before {
+  content: "><"
+}
+
+.dock-sidebar-button::before{
+  content: "<-"
+}
+
+.dock-sidebar-button.flipped::before{
+  content: "->"
+}
+
+.code.lineno::before {
+  counter-increment: lineno 10;
+  content: counter(lineno) "\00a0";
+}
+
+.code.tabbed::before{
+  content: "->\00a0\00a0\00a0";
+}
+
+/* ========================================
+  Game Objects
+======================================== */
+.action {
+  height: var(--token-size);
+  width: var(--token-size);
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.action.run {
+  background-color: green;
+}
+
+.action.jump {
+  background-color: red;
+}
+
+.action.slide {
+  background-color: blue;
+}
+
+.conditional {
+  height: var(--token-size);
+  width: var(--token-size);
+  border: 1px solid black;
+}
+
+.conditional.gem {
+  background-color: cyan;
+}
+
+.conditional.gem::after {
+  content: attr(data-value);
+}
+
+.conditional.troll[data-value='orange'] {
+  background-color: orange;
+}
+
+.conditional.troll[data-value='purple'] {
+  background-color: purple;
+}
+
+.action.disabled {
+  background-color: silver;
+  color: white;
+}
+
+.conditional.disabled {
+  background-color: silver;
+  color: white;
+}
+
+.conditional.troll.disabled {
+  background-color: silver;
+  color: white;
+}
+
+/* ========================================
+  Misc
+======================================== */
+.hidden {
+  display: none;
+}
+
+.disabled{
+  background-color: silver;
+  color: white;
+}
+

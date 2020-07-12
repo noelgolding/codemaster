@@ -1,0 +1,7 @@
+BEGIN
+10 ${action}
+20 ${action}
+30 ${action}
+40 ${action}
+50 ${action}
+END

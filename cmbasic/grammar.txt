@@ -1,0 +1,29 @@
+prog                       : BEGIN NEWLINE stmts NEWLINE END
+stmts                      : stmts stmt
+                           | stmt
+stmt                       : lineno expr NEWLINE
+lineno                     : whole-number
+whole-number               : [1-9][0-9]*
+expr                       : action
+                           | if-then
+action                     : RUN
+                           | JUMP
+                           | SLIDE
+if-then                    : if-then-goto
+                           | if-then-loop 
+                           | if-then-action
+                           | if-then-action-else-action
+if-then-goto               : IF cond THEN GOTO lineno
+if-then-loop               : IF cond THEN LOOP actionlist
+if-then-action             : IF cond THEN action
+if-then-action-else-action : IF cond THEN action ELSE action
+cond                       : gem-cond
+                           | troll-cond
+actionlist                 : indent action (\n actionlist)*
+gem-cond                   : GEM bool-op whole-number
+troll-cond                 : TROLL bool-op color
+indent                     : >>>
+bool-op                    : IS
+                           | IS NOT
+color                      : ORANGE
+                           | PURPLE
