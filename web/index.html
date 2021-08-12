@@ -21,9 +21,14 @@
         </div>
         <div class="menubar-container">menubar</div>
         <div class="toolbar-container">
-          <div class="game-buttons-container">
+          <div class="io-buttons-container">
             <button class="open"></button>
             <button class="save"></button>
+          </div>
+          <div class="game-buttons-container">
+            <button class="prev"></button>
+            <button class="reset"></button>
+            <button class="next"></button>
           </div>
           <div class="ui-buttons-container">
             <button class="dock-sidebar-button" onclick="dockSideBar(this, '.app-container')"></button>
@@ -36,7 +41,7 @@
 
       <div class="ui-container">
         <div class="hud-container">HUD</div>
-        <div class="gamescreen-container">gamescreen</div>
+        <div class="gamescreen-container">gamescreen <input id="foo"></input></div>
       </div>
 
       <div class="console-container">
@@ -62,11 +67,16 @@
             <div class="code-lines">
               <div class="code lineno" contenteditable="true">run</div>
               <div class="code lineno" contenteditable="true">jump</div>
-              <div class="code lineno" contenteditable="true">while gems is not 2 then loop</div>
+              <div class="code lineno" contenteditable="true">while gems is not 2 repeat</div>
               <div class="code tabbed" contenteditable="true">run</div>
               <div class="code tabbed" contenteditable="true">jump</div>
               <div class="code lineno" contenteditable="true">slide</div>
-              <div class="code lineno" contenteditable="true">if troll is orange then jump else slide</div>
+              <div class="code lineno" contenteditable="true">if troll is orange</div>
+              <div class="code tabbed" contenteditable="true">then jump</div>
+              <div class="code tabbed" contenteditable="true">else slide</div>
+              <div class="code lineno" contenteditable="true">run</div>
+              <div class="code lineno" contenteditable="true">if gems is 3 goto 10</div>
+              <div class="code lineno" contenteditable="true">slide</div>
             </div>
             <div>End</div>
           </div>
@@ -104,7 +114,14 @@
             <div class="conditional troll" data-value="--orange"></div>
           </div>
         </div>
-        <div class="flowchart-container">flowchart</div>
+        <div class="flowchart-container">
+          <svg>
+            <circle cx="50%" cy="30" r="1.5rem"></circle>
+            <circle cx="50%" cy="90" r="20"></circle>
+            <circle cx="75%" cy="90" r="20"></circle>
+            <circle cx="25%" cy="90" r="20"></circle>
+          </svg>
+        </div>
       </div>
 
       <div class="statusbar-container">statusbar</div>
@@ -117,3 +134,14 @@
   </body>
 
 </html>
+<!-- 
+BEGIN
+10 IF GEMS IS 4
+->  THEN SLIDE
+->  ELSE IF TROLL IS PURPLE
+->->  THEN RUN
+->->  ELSE SLIDE
+20 JUMP
+30 IF TROLL IS ORANGE GOTO 10 
+END
+ -->

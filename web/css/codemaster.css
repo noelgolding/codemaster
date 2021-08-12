@@ -32,7 +32,7 @@ html,body{
   background-color: #efefef;
   height: 100%;
   width: 100%;
-  max-width: 1024px;
+  /* max-width: 1024px; */
   display: grid;
   grid-column-gap: var(--ui-frame-gap); 
   grid-template-columns: auto min-content;
@@ -66,12 +66,17 @@ html,body{
 .toolbar-container {
   background-color: lightgray;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.io-buttons-container {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .game-buttons-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .ui-container {
@@ -96,7 +101,7 @@ html,body{
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: auto 10rem;
+  grid-template-columns: auto min-content;
   grid-template-rows: min-content auto;
   grid-template-areas: 
   "debugbar debugbar"
@@ -105,7 +110,8 @@ html,body{
 }
 
 .console-container.flipped {
-  grid-template-columns: 10rem auto;
+  grid-template-columns: min-content auto;
+  grid-template-rows: min-content auto;
   grid-template-areas: 
   "debugbar debugbar"
   "vars     code"
@@ -136,7 +142,8 @@ html,body{
 
 .codeeditor-container {
   grid-area: code;
-  max-width: 30rem;
+  /* max-width: 30rem; */
+  padding-left: .5rem;
   font-family: monospace;
   text-transform: uppercase;
   background-color: var(--terminal-black);
@@ -166,22 +173,7 @@ html,body{
 }
 
 .flowchart-container {
-  /* TODO : wrangle the graph, or better yet, get a tileable graph paper background image */
-  background-color: var(--graph-bg-color);
-  background-image: 
-    linear-gradient(rgba(25, 70, 91, 0.5) 1px, transparent 1px),  /* minor horizontal */
-    linear-gradient(#19465b 1px, transparent 1px), /* major horizontal */
-    linear-gradient(90deg, rgba(25, 70, 91, 0.5) 1px, transparent 1px), /* minor vertical */
-    linear-gradient(90deg, rgba(25, 70, 91, 0.7) 1px, transparent 1px), /* major vertical */
-    linear-gradient(transparent 3px, #0f004f 3px, #00004f 58px, transparent 58px), /* gradient background overlay */
-    linear-gradient(90deg, rgba(25, 70, 91, 0.7) 3px, transparent 3px, transparent 58px, rgba(25, 70, 91, 0.7) 58px); /* dot */
-  background-size: 
-    var(--graph-bg-size-1), /* minor horizontal */
-    var(--graph-bg-size-2), /* major horizontal */
-    var(--graph-bg-size-1), /* minor vertical */
-    var(--graph-bg-size-2), /* major vertical */
-    var(--graph-bg-size-2), /* gradient background overlay */
-    var(--graph-bg-size-2); /* dot */
+    
 }
 
 .statusbar-container {
